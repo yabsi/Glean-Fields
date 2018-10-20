@@ -11,6 +11,7 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import LoginView from './LoginView'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -34,6 +35,7 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
+            <LoginView navigation={this.props.navigation} />
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
 
