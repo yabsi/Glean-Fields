@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Button } from 'react-native';
 import { Header, Text } from 'react-native-elements'
+import { WebBrowser } from 'expo'
 
 export default class FarmDetailsView extends React.Component {
 
@@ -8,9 +9,11 @@ export default class FarmDetailsView extends React.Component {
         super(props);
     }
 
-    onPressDonate() {
-        console.log('Donating')
-    }
+    _handleDonatePress = () => {
+        WebBrowser.openBrowserAsync(
+            'https://endhunger.org/DB_Registration/Farmers_view.php'
+        );
+    };
 
     componentDidMount() {
         const { params } = this.props.navigation.state
@@ -36,11 +39,26 @@ export default class FarmDetailsView extends React.Component {
             .then(response => response.json())
             .then(response => {
                 if (response.values.length == 0) {
-                    this.setState(state => ({ ...state, validHarvest: false, mostRecentHarvestId: -1 }))
+                    this.setState(state => ({ ...state, validHarvest: false }))
                 } else {
                     const most_recent = response.values[response.values.length - 1]
-                    console.log(most_recent.id)
-                    this.setState(state => ({ ...state, validHarvest: true, mostRecentHarvestId: most_recent.id }))
+                    this.setState(state => ({ ...state, validHarvest: true }))
+
+                    const base_url3 = 'http://35.208.38.242:3000/harvest'
+                    const url3 = `${base_url3}?operation_id=${most_recent.id}`
+                    fetch(url3)
+                        .then(response => response.json())
+                        .then(response => {
+                            console.log(response)
+                            // if (response.values.length == 0) {
+                            //     this.setState(state => ({ ...state, validHarvest: false, mostRecentHarvestId: -1 }))
+                            // } else {
+                            //     const most_recent = response.values[response.values.length - 1]
+                            //     console.log(most_recent.id)
+                            //     this.setState(state => ({ ...state, validHarvest: true, mostRecentHarvestId: most_recent.id }))
+                            // }
+                        })
+                        .catch(error => console.log(error))
                 }
             })
             .catch(error => console.log(error))
@@ -63,7 +81,7 @@ export default class FarmDetailsView extends React.Component {
                         }
                         <Button
                             title='Donate'
-                            onPress={this.onPressDonate}
+                            onPress={this._handleDonatePress}
                             color='#841584'
                         />
                     </View>

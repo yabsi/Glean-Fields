@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Button, Linking } from 'react-native';
+import { WebBrowser } from 'expo'
 
 export default class LoginView extends React.Component {
     constructor(props) {
@@ -7,11 +8,9 @@ export default class LoginView extends React.Component {
     }
 
     _handleLoginPress = () => {
-        console.log(`https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`)
-        console.log(this.state)
-        // WebBrowser.openBrowserAsync(
-        //     `https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`
-        // );
+        WebBrowser.openBrowserAsync(
+            `https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`
+        );
     };
 
     componentDidMount() {
