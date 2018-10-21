@@ -9,7 +9,6 @@ import SettingsScreen from '../screens/SettingsScreen';
 import FarmDetailsView from '../screens/FarmDetailsView'
 import WebDonationView from '../screens/WebDonationView'
 import WebLoginView from '../screens/WebLoginView'
-import LoginView from '../screens/LoginView'
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -32,21 +31,6 @@ HomeStack.navigationOptions = {
     />
   ),
 };
-
-// const FarmDetailsStack = createStackNavigator({
-//   FarmDetails: FarmDetailsView,
-// });
-
-// FarmDetailsStack.navigationOptions = {
-//   tabBarLabel: 'Farm Details',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-//     />
-//   ),
-// };
-
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,

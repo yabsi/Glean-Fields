@@ -1,16 +1,16 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Button } from 'react-native';
 import { Text } from 'react-native-elements'
+import * as Progress from 'react-native-progress';
 
 export default class FarmDetailsView extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     static navigationOptions = {
         title: 'Field Details',
     };
-
-    constructor(props) {
-        super(props);
-    }
 
     _handleDonatePress = () => {
         this.props.navigation.navigate('WebDonationView')
@@ -50,14 +50,11 @@ export default class FarmDetailsView extends React.Component {
                     fetch(url3)
                         .then(response => response.json())
                         .then(response => {
-                            console.log(response)
-                            // if (response.values.length == 0) {
-                            //     this.setState(state => ({ ...state, validHarvest: false, mostRecentHarvestId: -1 }))
-                            // } else {
-                            //     const most_recent = response.values[response.values.length - 1]
-                            //     console.log(most_recent.id)
-                            //     this.setState(state => ({ ...state, validHarvest: true, mostRecentHarvestId: most_recent.id }))
-                            // }
+                            let cropName = response.cropName.toLowerCase()
+                            cropName = cropName.replace(/[^A-Za-z]/g, ' ')
+                            cropName = cropName.charAt(0).toUpperCase() + cropName.slice(1)
+                            const cropDate = (new Date(response.endDate)).toDateString()
+                            this.setState(state => ({ ...state, cropName, cropDate }))
                         })
                         .catch(error => console.log(error))
                 }
@@ -66,15 +63,21 @@ export default class FarmDetailsView extends React.Component {
     }
 
     render() {
-        const { params } = this.props.navigation.state;
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.container}>
                     <View>
-                        {
-                            (this.state && this.state.validArea) ?
-                                (<Text style={styles.fieldContent}>Area: {this.state.area}</Text>) :
-                                (<Text style={styles.fieldContent}>No data available</Text>)
+                        {(this.state && this.state.validArea) ?
+                            (<Text style={styles.fieldContent}>Area Harvested: {this.state.area}</Text>) :
+                            (<Progress.Circle color='#841584' style={styles.spinner} size={30} indeterminate={true} />)
+                        }
+                        {(this.state && this.state.validHarvest && this.state.cropDate) ?
+                            (<Text style={styles.fieldContent}>Date Harvested: {this.state.cropDate}</Text>) :
+                            (<Progress.Circle color='#841584' style={styles.spinner} size={30} indeterminate={true} />)
+                        }
+                        {(this.state && this.state.validHarvest && this.state.cropName) ?
+                            (<Text style={styles.fieldContent}>Crop Harvested: {this.state.cropName}</Text>) :
+                            (<Progress.Circle color='#841584' style={styles.spinner} size={30} indeterminate={true} />)
                         }
                         <Button
                             title='Donate'
@@ -93,22 +96,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    welcomeContainer: {
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
-    },
-    welcomeImage: {
-        width: 100,
-        height: 80,
-        resizeMode: 'contain',
-        marginTop: 3,
-        marginLeft: -10,
+    spinner: {
+        alignItems: 'center'
     },
     fieldContent: {
         textAlign: 'center',
         padding: 15,
-        fontSize: 16,
-        lineHeight: 10
+        fontSize: 14,
+        lineHeight: 14
     }
 });

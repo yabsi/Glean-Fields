@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, Button, StyleSheet, View } from 'react-native';
+import * as Progress from 'react-native-progress';
 
 export default class LinksScreen extends React.Component {
 
@@ -29,10 +30,8 @@ export default class LinksScreen extends React.Component {
     );
   }
 
-  onPressFarm(id, name) {
-    // console.log(this.props.navigation)
+  onPressField(id, name) {
     this.props.navigation.navigate('FarmDetailsView', { field: { id, name } });
-
   }
 
   getButtons() {
@@ -41,7 +40,7 @@ export default class LinksScreen extends React.Component {
         <Button
           key={field.id}
           title={field.name}
-          onPress={() => this.onPressFarm(field.id, field.name)}
+          onPress={() => this.onPressField(field.id, field.name)}
           color="#841584"
         />
       </View>
@@ -52,7 +51,9 @@ export default class LinksScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         {
-          (this.state && this.state.fields) ? this.getButtons() : <View></View>
+          (this.state && this.state.fields) ?
+            this.getButtons() :
+            (<Progress.Circle thickness={30} color='#841584' style={styles.spinner} size={300} indeterminate={true} />)
         }
       </ScrollView >
     );
@@ -73,4 +74,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     alignContent: 'center'
   },
+  spinner: {
+    alignItems: 'center'
+  }
 });

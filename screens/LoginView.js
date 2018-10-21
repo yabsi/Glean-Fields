@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Button, Linking } from 'react-native';
-import { WebBrowser } from 'expo'
 
 export default class LoginView extends React.Component {
     constructor(props) {
@@ -45,8 +44,6 @@ export default class LoginView extends React.Component {
     }
 
     render() {
-        console.log('LoginView')
-        console.log(this.props)
         return (
             <View style={[{ width: "30%", margin: 10 }]}>
                 <Button
