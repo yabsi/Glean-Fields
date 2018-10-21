@@ -3,6 +3,9 @@ import { View, Button, TextInput, Linking } from 'react-native';
 import { WebBrowser } from 'expo';
 
 export default class LoginView extends React.Component {
+    static navigationOptions = {
+        title: 'Login',
+    };
 
     constructor(props) {
         super(props);
