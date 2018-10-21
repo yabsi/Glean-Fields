@@ -12,9 +12,11 @@ export default class LoginView extends React.Component {
     }
 
     _handleLoginPress = () => {
-        WebBrowser.openBrowserAsync(
-            `https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`
-        );
+        console.log(`https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`)
+        console.log(this.state)
+        // WebBrowser.openBrowserAsync(
+        //     `https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`
+        // );
     };
 
     componentDidMount() {
