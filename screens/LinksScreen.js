@@ -26,7 +26,8 @@ export default class LinksScreen extends React.Component {
   }
 
   onPressFarm(id) {
-    console.log(id);
+    console.log(this.props.navigation)
+    this.props.navigation.navigate('FarmDetailsView', { farm_id: id });
   }
 
   getButtons() {

@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import FarmDetailsView from '../screens/FarmDetailsView';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -58,3 +59,17 @@ export default createBottomTabNavigator({
   LinksStack,
   SettingsStack,
 });
+
+// const FarmDetailsStack = createStackNavigator({
+//   FarmDetails: FarmDetailsView,
+// });
+
+// FarmDetailsStack.navigationOptions = {
+//   tabBarLabel: 'Details',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+//     />
+//   ),
+// };
