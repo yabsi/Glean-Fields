@@ -10,9 +10,7 @@ export default class FarmDetailsView extends React.Component {
     }
 
     _handleDonatePress = () => {
-        WebBrowser.openBrowserAsync(
-            'https://endhunger.org/DB_Registration/Farmers_view.php'
-        );
+        this.props.navigation.navigate('WebDonationView')
     };
 
     componentDidMount() {

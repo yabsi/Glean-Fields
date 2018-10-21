@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import FarmDetailsView from '../screens/FarmDetailsView'
+import WebDonationView from '../screens/WebDonationView'
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -42,8 +43,8 @@ HomeStack.navigationOptions = {
 
 const LinksStack = createStackNavigator({
   Links: LinksScreen,
-  FarmDetailsView
-  // FarmDetailsStack
+  FarmDetailsView,
+  WebDonationView
 });
 
 LinksStack.navigationOptions = {
