@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {
     flex: 1,
-    paddingTop: 15,
+    paddingBottom: 20,
     backgroundColor: '#fff',
     marginRight: 40,
     marginLeft: 40,
