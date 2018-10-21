@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, TextInput } from 'react-native';
+import { View, Button, TextInput, Linking } from 'react-native';
 import { WebBrowser } from 'expo';
 
 export default class LoginView extends React.Component {
@@ -9,17 +9,17 @@ export default class LoginView extends React.Component {
     }
 
     _handleLoginPress = () => {
-        console.log('handle login press');
-        console.log(this.state);
-        console.log(`https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`)
+        // console.log(`https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`)
         WebBrowser.openBrowserAsync(
             `https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`
         );
     };
 
     componentDidMount() {
+        const url = 'https://4yobgfho99.execute-api.us-east-2.amazonaws.com/default/firstLegHandler';
+        Linking.addEventListener(url, () => console.log('linking called'));
         fetch(
-            'https://4yobgfho99.execute-api.us-east-2.amazonaws.com/default/firstLegHandler'
+            url
         ).then(
             (response) => response.json()
         ).then(
@@ -34,10 +34,11 @@ export default class LoginView extends React.Component {
     }
 
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         return (
-            <View>
+            <View style={[{ width: "30%", margin: 10 }]}>
                 <Button
+                    disabled={!(this.state && this.state.requestToken)}
                     onPress={this._handleLoginPress}
                     title="Login"
                     color="#841584"
@@ -46,5 +47,4 @@ export default class LoginView extends React.Component {
             </View>
         )
     }
-
 }
