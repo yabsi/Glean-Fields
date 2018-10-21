@@ -10,7 +10,6 @@ export default class HomeScreen extends React.Component {
       backgroundColor: '#841584',
     },
     headerTitleStyle: {
-      padding: 30,
       flex: 1,
       fontSize: 36,
       textAlign: 'center',
