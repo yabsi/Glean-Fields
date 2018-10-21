@@ -1,12 +1,7 @@
 import React from 'react';
-import { View, Button, TextInput, Linking } from 'react-native';
-import { WebBrowser } from 'expo';
+import { View, Button, Linking } from 'react-native';
 
 export default class LoginView extends React.Component {
-    static navigationOptions = {
-        title: 'Login',
-    };
-
     constructor(props) {
         super(props);
     }

@@ -1,36 +1,37 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, Button, View, Image } from 'react-native';
+import { ScrollView, StyleSheet, View, Button } from 'react-native';
+import { Header, Text } from 'react-native-elements'
 import LinksScreen from './LinksScreen';
 
 export default class FarmDetailsView extends React.Component {
     static navigationOptions = {
-        title: 'Details',
+        title: '',
     };
 
     constructor(props) {
         super(props);
     }
 
+    // onPressBack() {
+    //     this.props.navigation.navigate(LinksScreen)
+    // }
+
     render() {
-        console.log(this.props.farm_id);
+        // console.log(this.props.farm.id);
         const { params } = this.props.navigation.state;
+        console.log(params)
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.container}>
-                    <View style={styles.welcomeContainer}>
-                        <Image
-                            source={
-                                __DEV__
-                                    ? require('../assets/images/robot-dev.png')
-                                    : require('../assets/images/robot-prod.png')
-                            }
-                            style={styles.welcomeImage}
-                        />
+                    <Header
+                        centerComponent={{ text: `Farm Details for '${params.farm.name}'`, style: { color: '#fff' } }}
+                    />
+                    <View>
+                        <Text style={styles.farmContent}>Farm ID: {params.farm.id}</Text>
                     </View>
-                    <Text>Farm ID: {params.farm_id}</Text>
                     {/* <Button
                         title="Back"
-                        onPress={this.onPressBack}
+                        onPress={() => this.props.navigation.navigate('LinksScreen')}
                         color="#841584"
                     /> */}
                 </ScrollView >
@@ -42,7 +43,6 @@ export default class FarmDetailsView extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 15,
         backgroundColor: '#fff',
     },
     welcomeContainer: {
@@ -56,5 +56,11 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         marginTop: 3,
         marginLeft: -10,
+    },
+    farmContent: {
+        textAlign: 'center',
+        padding: 15,
+        fontSize: 16,
+        lineHeight: 10
     }
 });

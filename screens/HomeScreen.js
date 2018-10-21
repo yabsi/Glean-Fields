@@ -1,14 +1,13 @@
 import React from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
 
 import LoginView from './LoginView'
 
 export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Login',
+  };
+
   render() {
     return (
       <View style={styles.container}>

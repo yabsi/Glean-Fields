@@ -1,8 +1,7 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Button } from 'react-native';
+import { ScrollView, Button, StyleSheet, View } from 'react-native';
 
 export default class LinksScreen extends React.Component {
-
 
   static navigationOptions = {
     title: 'Farms',
@@ -31,6 +30,8 @@ export default class LinksScreen extends React.Component {
       (error) => console.log(error)
     );
     */
+
+
     let values = farmData.values
     values = values.map(val => ({ id: val.id, name: val.name }))
     this.setState(state => ({ farms: values }))
@@ -38,17 +39,19 @@ export default class LinksScreen extends React.Component {
 
   onPressFarm(id) {
     // console.log(this.props.navigation)
-    this.props.navigation.navigate('FarmDetailsView', { farm_id: id });
+    this.props.navigation.navigate('FarmDetailsView', { farm: (this.state.farms.filter((e) => e.id = id))[0] });
   }
 
   getButtons() {
     return this.state.farms.map(farm => (
-      <Button
-        key={farm.id}
-        title={farm.name}
-        onPress={() => this.onPressFarm(farm.id)}
-        color="#841584"
-      />
+      <View style={styles.farmContainer} key={farm.id}>
+        <Button
+          key={farm.id}
+          title={farm.name}
+          onPress={() => this.onPressFarm(farm.id)}
+          color="#841584"
+        />
+      </View>
     ));
   }
 
@@ -69,6 +72,14 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff',
+  },
+  farmContainer: {
+    flex: 1,
+    paddingTop: 15,
+    backgroundColor: '#fff',
+    marginRight: 40,
+    marginLeft: 40,
+    alignContent: 'center'
   },
 });
 
