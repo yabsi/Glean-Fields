@@ -12,7 +12,6 @@ export default class LoginView extends React.Component {
     }
 
     _handleLoginPress = () => {
-        // console.log(`https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`)
         WebBrowser.openBrowserAsync(
             `https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`
         );
@@ -37,7 +36,6 @@ export default class LoginView extends React.Component {
     }
 
     render() {
-        // console.log(this.state);
         return (
             <View style={[{ width: "30%", margin: 10 }]}>
                 <Button
