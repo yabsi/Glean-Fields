@@ -1,11 +1,15 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, Button } from 'react-native';
 import { Header, Text } from 'react-native-elements'
 
 export default class FarmDetailsView extends React.Component {
 
     constructor(props) {
         super(props);
+    }
+
+    onPressDonate() {
+        console.log('Donating')
     }
 
     render() {
@@ -19,6 +23,11 @@ export default class FarmDetailsView extends React.Component {
                     />
                     <View>
                         <Text style={styles.fieldContent}>Farm ID: {params.field.id}</Text>
+                        <Button
+                            title='Donate'
+                            onPress={this.onPressDonate}
+                            color='#841584'
+                        />
                     </View>
                 </ScrollView >
             </View>
