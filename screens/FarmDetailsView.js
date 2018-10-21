@@ -14,22 +14,36 @@ export default class FarmDetailsView extends React.Component {
 
     componentDidMount() {
         const { params } = this.props.navigation.state
-        const base_url = 'http://35.208.38.242:3000/field_details'
         const id = params.field.id
+
+        const base_url = 'http://35.208.38.242:3000/field_details'
         const url = `${base_url}?farm_id=${id}`
         fetch(url)
             .then(response => response.json())
             .then(response => {
-                console.log(response)
                 if (response.values.length == 0) {
                     this.setState(state => ({ validArea: false, area: 0 }))
                 } else {
                     const area = response.values[0].area.valueAsDouble
-                    this.setState(state => ({ validArea: true, area: area }))
+                    this.setState(state => ({ ...state, validArea: true, area: area }))
                 }
             })
             .catch(error => console.log(error))
-        // .then(() => fetch())
+
+        const base_url2 = 'http://35.208.38.242:3000/field_operations'
+        const url2 = `${base_url2}?farm_id=${id}`
+        fetch(url2)
+            .then(response => response.json())
+            .then(response => {
+                if (response.values.length == 0) {
+                    this.setState(state => ({ ...state, validHarvest: false, mostRecentHarvestId: -1 }))
+                } else {
+                    const most_recent = response.values[response.values.length - 1]
+                    console.log(most_recent.id)
+                    this.setState(state => ({ ...state, validHarvest: true, mostRecentHarvestId: most_recent.id }))
+                }
+            })
+            .catch(error => console.log(error))
     }
 
     render() {
