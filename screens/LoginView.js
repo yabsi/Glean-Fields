@@ -8,14 +8,11 @@ export default class LoginView extends React.Component {
     }
 
     _handleLoginPress = () => {
-        WebBrowser.openBrowserAsync(
-            `https://my.deere.com/consentToUseOfData?oauth_token=${this.state.requestToken}`
-        );
+        this.props.navigation.navigate('WebLoginView', { requestToken: this.state.requestToken })
     };
 
     componentDidMount() {
         const url = 'https://4yobgfho99.execute-api.us-east-2.amazonaws.com/default/firstLegHandler';
-        Linking.addEventListener(url, () => console.log('linking called'));
         fetch(
             url
         ).then(
@@ -32,6 +29,8 @@ export default class LoginView extends React.Component {
     }
 
     render() {
+        console.log('LoginView')
+        console.log(this.props)
         return (
             <View style={[{ width: "30%", margin: 10 }]}>
                 <Button

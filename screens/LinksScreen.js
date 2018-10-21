@@ -4,7 +4,7 @@ import { ScrollView, Button, StyleSheet, View } from 'react-native';
 export default class LinksScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Farms',
+    title: 'Fields',
   };
 
   constructor(props) {

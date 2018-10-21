@@ -1,9 +1,12 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Button } from 'react-native';
-import { Header, Text } from 'react-native-elements'
-import { WebBrowser } from 'expo'
+import { Text } from 'react-native-elements'
 
 export default class FarmDetailsView extends React.Component {
+
+    static navigationOptions = {
+        title: 'Field Details',
+    };
 
     constructor(props) {
         super(props);
@@ -67,11 +70,7 @@ export default class FarmDetailsView extends React.Component {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.container}>
-                    <Header
-                        centerComponent={{ text: `Farm Details for '${params.field.name}'`, style: { color: '#fff' } }}
-                    />
                     <View>
-                        {/* <Text style={styles.fieldContent}>Farm ID: {params.field.id}</Text> */}
                         {
                             (this.state && this.state.validArea) ?
                                 (<Text style={styles.fieldContent}>Area: {this.state.area}</Text>) :
