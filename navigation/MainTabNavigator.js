@@ -64,11 +64,11 @@ const SettingsStack = createStackNavigator({
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'About',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+      name={Platform.OS === 'ios' ? `ios-help${focused ? '' : '-outline'}` : 'md-help'}
     />
   ),
 };
