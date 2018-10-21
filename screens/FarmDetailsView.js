@@ -12,9 +12,28 @@ export default class FarmDetailsView extends React.Component {
         console.log('Donating')
     }
 
+    componentDidMount() {
+        const { params } = this.props.navigation.state
+        const base_url = 'http://35.208.38.242:3000/field_details'
+        const id = params.field.id
+        const url = `${base_url}?farm_id=${id}`
+        fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                console.log(response)
+                if (response.values.length == 0) {
+                    this.setState(state => ({ validArea: false, area: 0 }))
+                } else {
+                    const area = response.values[0].area.valueAsDouble
+                    this.setState(state => ({ validArea: true, area: area }))
+                }
+            })
+            .catch(error => console.log(error))
+        // .then(() => fetch())
+    }
+
     render() {
         const { params } = this.props.navigation.state;
-        console.log(params)
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.container}>
@@ -22,7 +41,12 @@ export default class FarmDetailsView extends React.Component {
                         centerComponent={{ text: `Farm Details for '${params.field.name}'`, style: { color: '#fff' } }}
                     />
                     <View>
-                        <Text style={styles.fieldContent}>Farm ID: {params.field.id}</Text>
+                        {/* <Text style={styles.fieldContent}>Farm ID: {params.field.id}</Text> */}
+                        {
+                            (this.state && this.state.validArea) ?
+                                (<Text style={styles.fieldContent}>Area: {this.state.area}</Text>) :
+                                (<Text style={styles.fieldContent}>No data available</Text>)
+                        }
                         <Button
                             title='Donate'
                             onPress={this.onPressDonate}

@@ -26,9 +26,24 @@ HomeStack.navigationOptions = {
   ),
 };
 
+// const FarmDetailsStack = createStackNavigator({
+//   FarmDetails: FarmDetailsView,
+// });
+
+// FarmDetailsStack.navigationOptions = {
+//   tabBarLabel: 'Farm Details',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+//     />
+//   ),
+// };
+
 const LinksStack = createStackNavigator({
   Links: LinksScreen,
   FarmDetailsView
+  // FarmDetailsStack
 });
 
 LinksStack.navigationOptions = {
@@ -55,9 +70,11 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+
 export default createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
 });
+
 
