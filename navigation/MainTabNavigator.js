@@ -55,13 +55,6 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-const FarmDetailsStack = createStackNavigator({
-  FarmDetails: FarmDetailsView,
-});
-
-FarmDetailsStack.navigationOptions = {};
-
-
 export default createBottomTabNavigator({
   HomeStack,
   LinksStack,
