@@ -8,7 +8,11 @@ export default class LoginView extends React.Component {
     }
 
     _handleLoginPress = () => {
-        this.props.navigation.navigate('WebLoginView', { requestToken: this.state.requestToken })
+        this.props.navigation.navigate('WebLoginView',
+            {
+                requestToken: this.state.requestToken
+            }
+        )
     };
 
     componentDidMount() {
@@ -26,6 +30,18 @@ export default class LoginView extends React.Component {
         ).catch(
             (error) => console.log(error)
         )
+    }
+
+    getAccessTickets() {
+        const base_url = 'http://35.208.38.242:3000/callback'
+        const url = `${base_url}?oauth_verifier=${id}&token=${token}&secret=${secret}`
+
+        fetch(url)
+            .then(response => response.json())
+            .then(
+                () => this.props.navigation.navigate('FarmDetailsView')
+            )
+            .catch(error => console.log(error))
     }
 
     render() {

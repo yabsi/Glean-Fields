@@ -20,7 +20,7 @@ export default class WebLoginView extends React.Component {
 
     render() {
         if (this.state && this.state.verifier) {
-            this.props.navigation.navigate('LoginView', { verifier: this.state.verifier })
+            this.props.navigation.navigate('LinksScreen', { verifier: this.state.verifier });
         }
         return (
             (this.state && this.state.verifier) ? (<View />) : (
