@@ -11,7 +11,8 @@ export default class HomeScreen extends React.Component {
     },
     headerTitleStyle: {
       padding: 30,
-      fontSize: 50,
+      flex: 1,
+      fontSize: 36,
       textAlign: 'center',
       color: 'white'
     },

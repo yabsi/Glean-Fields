@@ -3,46 +3,28 @@ import { SectionList, Image, StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
 
 export default class ExpoConfigView extends React.Component {
+  static navigationOptions = {
+    title: 'About',
+  };
+
   render() {
     const { manifest } = Constants;
     const sections = [
-      { data: [{ value: manifest.sdkVersion }], title: 'sdkVersion' },
-      { data: [{ value: manifest.privacy }], title: 'privacy' },
-      { data: [{ value: manifest.version }], title: 'version' },
-      { data: [{ value: manifest.orientation }], title: 'orientation' },
       {
-        data: [{ value: manifest.primaryColor, type: 'color' }],
-        title: 'primaryColor',
+        data: [{ value: 'Kevin Blicharski & Yousef Al Absi' }],
+        title: 'Authors',
       },
       {
-        data: [{ value: manifest.splash && manifest.splash.image }],
-        title: 'splash.image',
+        data: [{ value: 'John Deere & Granular' }],
+        title: 'APIs Used',
       },
       {
-        data: [
-          {
-            value: manifest.splash && manifest.splash.backgroundColor,
-            type: 'color',
-          },
-        ],
-        title: 'splash.backgroundColor',
+        data: [{ value: 'AWS, Google Cloud Platform, React Native' }],
+        title: 'Tools Used',
       },
       {
-        data: [
-          {
-            value: manifest.splash && manifest.splash.resizeMode,
-          },
-        ],
-        title: 'splash.resizeMode',
-      },
-      {
-        data: [
-          {
-            value:
-              manifest.ios && manifest.ios.supportsTablet ? 'true' : 'false',
-          },
-        ],
-        title: 'ios.supportsTablet',
+        data: [{ value: 'HackISU 10/21/2018' }],
+        title: 'Event',
       },
     ];
 
@@ -83,25 +65,26 @@ export default class ExpoConfigView extends React.Component {
 }
 
 const ListHeader = () => {
+
+
   const { manifest } = Constants;
 
   return (
     <View style={styles.titleContainer}>
       <View style={styles.titleIconContainer}>
-        <AppIconPreview iconUrl={manifest.iconUrl} />
+        <AppIconPreview iconUrl={'assets/images/robot-prod.png'} />
       </View>
 
       <View style={styles.titleTextContainer}>
         <Text style={styles.nameText} numberOfLines={1}>
-          {manifest.name}
-        </Text>
-
-        <Text style={styles.slugText} numberOfLines={1}>
-          {manifest.slug}
+          Glean Fields
         </Text>
 
         <Text style={styles.descriptionText}>
-          {manifest.description}
+          A simple mobile app connecting farmers
+        </Text>
+        <Text style={styles.descriptionText}>
+          and non-profits to help reduce food waste.
         </Text>
       </View>
     </View>
@@ -127,16 +110,11 @@ const SectionContent = props => {
 };
 
 const AppIconPreview = ({ iconUrl }) => {
-  if (!iconUrl) {
-    iconUrl =
-      'https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png';
-  }
-
   return (
     <Image
-      source={{ uri: iconUrl }}
-      style={{ width: 64, height: 64 }}
-      resizeMode="cover"
+      source={require('../assets/images/logo.png')}
+      style={{ width: 72, height: 72 }}
+      resizeMode="stretch"
     />
   );
 };
