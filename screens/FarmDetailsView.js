@@ -12,8 +12,8 @@ export default class FarmDetailsView extends React.Component {
         title: 'Field Details',
     };
 
-    _handleDonatePress = () => {
-        this.props.navigation.navigate('WebDonationView')
+    _handleDonatePress = (cropValue) => {
+        this.props.navigation.navigate('WebDonationView', { cropValue })
     };
 
     componentDidMount() {
@@ -29,13 +29,16 @@ export default class FarmDetailsView extends React.Component {
                     this.setState(state => ({ validArea: false, area: 0 }))
                 } else {
                     const area = response.values[0].area.valueAsDouble
-                    this.setState(state => ({ ...state, validArea: true, area: area }))
+                    this.setState(state => ({ ...state, validArea: true, area }))
                 }
             })
             .catch(error => console.log(error))
 
         const base_url2 = 'http://35.208.38.242:3000/field_operations'
         const url2 = `${base_url2}?farm_id=${id}`
+
+        console.log(url2);
+
         fetch(url2)
             .then(response => response.json())
             .then(response => {
@@ -68,7 +71,7 @@ export default class FarmDetailsView extends React.Component {
                 <ScrollView style={styles.container}>
                     <View>
                         {(this.state && this.state.validArea) ?
-                            (<Text style={styles.fieldContent}>Area Harvested: {this.state.area}</Text>) :
+                            (<Text style={styles.fieldContent}>Total Area: {this.state.area.toFixed(2)}</Text>) :
                             (<Progress.Circle color='#841584' style={styles.spinner} size={30} indeterminate={true} />)
                         }
                         {(this.state && this.state.validHarvest && this.state.cropDate) ?
@@ -79,11 +82,27 @@ export default class FarmDetailsView extends React.Component {
                             (<Text style={styles.fieldContent}>Crop Harvested: {this.state.cropName}</Text>) :
                             (<Progress.Circle color='#841584' style={styles.spinner} size={30} indeterminate={true} />)
                         }
-                        <Button
-                            title='Donate'
-                            onPress={this._handleDonatePress}
-                            color='#841584'
-                        />
+                        {(this.state && this.state.validArea) ?
+                            (<Text style={styles.fieldContent}>Estimated Leftovers: {(this.state.area * 2.62 / 100).toFixed(2)}</Text>) :
+                            (<Progress.Circle color='#841584' style={styles.spinner} size={30} indeterminate={true} />)
+                        }
+                        {(this.state && this.state.area && this.state.cropName == 'Soybeans') ?
+                            (<Text style={styles.fieldContent}>Estimated Profits: {
+                                ((this.state.area * 2.62 / 100) * 765).toFixed(2)
+                            }</Text>) : (<Text />)
+                        }
+                        {(this.state && this.state.area && this.state.cropName == 'Corn wet') ?
+                            (<Text style={styles.fieldContent}>Estimated Profits: {
+                                ((this.state.area * 2.62 / 100) * 871).toFixed(2)
+                            }</Text>) : (<Text />)
+                        }
+                        <View style={styles.donateButton}>
+                            <Button
+                                title='Donate'
+                                onPress={() => this._handleDonatePress(((this.state.area * 2.62 / 100) * 871).toFixed(2))}
+                                color='#841584'
+                            />
+                        </View>
                     </View>
                 </ScrollView >
             </View>
@@ -104,5 +123,10 @@ const styles = StyleSheet.create({
         padding: 15,
         fontSize: 14,
         lineHeight: 14
+    },
+    donateButton: {
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 10,
     }
 });

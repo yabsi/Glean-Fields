@@ -5,7 +5,20 @@ import LoginView from './LoginView'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Login',
+    title: 'Glean Fields',
+    headerStyle: {
+      backgroundColor: '#841584',
+    },
+    headerTitleStyle: {
+      padding: 30,
+      fontSize: 50,
+      textAlign: 'center',
+      color: 'white'
+    },
+    // headerTitleContainerStyle: {
+    // alignItems: 'center',
+    // alignContent: 'center'
+    // }
   };
 
   render() {
@@ -16,8 +29,8 @@ export default class HomeScreen extends React.Component {
             <Image
               source={
                 __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
+                  ? require('../assets/images/logo.png')
+                  : require('../assets/images/logo.png')
               }
               style={styles.welcomeImage}
             />
@@ -45,14 +58,13 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 100,
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 150,
+    height: 150,
     resizeMode: 'contain',
     marginTop: 3,
-    marginLeft: -10,
   }
 });
