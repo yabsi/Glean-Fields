@@ -80,11 +80,11 @@ const ListHeader = () => {
           Glean Fields
         </Text>
 
-        <Text style={styles.descriptionText}>
-          A simple mobile app connecting farmers
-        </Text>
-        <Text style={styles.descriptionText}>
-          and non-profits to help reduce food waste.
+        <Text style={styles.descriptionText}>{`
+          A simple mobile app connecting
+          farmers and non-profits to help
+          reduce food waste.
+          `}
         </Text>
       </View>
     </View>
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 14,
     marginTop: 6,
+    margin: 0,
     color: '#4d4d4d',
   },
   colorContainer: {
